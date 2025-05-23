@@ -34,7 +34,7 @@ function openChromeWithAgentProfile(agentId: string) {
 
   const chromeArgs = [
     `--remote-debugging-port=${agentConfig.port}`,
-    `--user-data-dir=${`${__dirname}/${AGENTS_CHROME_PROFILE_DIR}`}`,
+    `--user-data-dir=${`${process.cwd()}/${AGENTS_CHROME_PROFILE_DIR}`}`,
     `--profile-directory=${agentConfig.profile}`,
     '--no-first-run',
     '--no-default-browser-check',
