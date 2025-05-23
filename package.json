@@ -1,0 +1,21 @@
+{
+  "name": "ai-agents",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "agent": "ts-node ./src/launchAgent.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "playwright": "^1.52.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "openai": "^4.102.0"
+  }
+}
