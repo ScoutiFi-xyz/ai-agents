@@ -4,6 +4,7 @@ import http from 'http';
 import { BrowserContext, chromium, Page } from 'playwright';
 import { OpenAI } from 'openai';
 import { AGENT_PROFILE_MAP } from './profiles';
+import { tickerFromAddress, addressFromTicker } from './address';
 
 dotenv.config();
 
@@ -97,7 +98,7 @@ You are a crypto trading agent.
 
 ${agentPersonality}
 
-The base token (stablecoin) is: ${process.env.STABLECOIN_ADDRESS}.
+The base token (stablecoin) is: ${tickerFromAddress(process.env.STABLECOIN_ADDRESS)}.
 
 `;
 
@@ -105,7 +106,7 @@ The base token (stablecoin) is: ${process.env.STABLECOIN_ADDRESS}.
   let balancesPrompt = '';
   for (const token of tokens) {
     if (token.balance) {
-      balancesPrompt += `- ${token.address}: ${token.balance}\n`;
+      balancesPrompt += `- ${tickerFromAddress(token.address)}: ${token.balance}\n`;
     }
   }
   prompt += `${balancesPrompt}\n`;
@@ -114,7 +115,7 @@ The base token (stablecoin) is: ${process.env.STABLECOIN_ADDRESS}.
   let pricesPrompt = '';
   for (const token of tokens) {
     if (token.price) {
-      pricesPrompt += `- ${token.address}: ${token.price}\n`;
+      pricesPrompt += `- ${tickerFromAddress(token.address)}: ${token.price}\n`;
     }
   }
   prompt += `${pricesPrompt}\n`;
@@ -334,7 +335,13 @@ async function runAgent(agentId: string) {
     //   amount: '50'
     // }
 
-    await performSwap(context, page, decision.from, decision.to, decision.amount);
+    await performSwap(
+      context,
+      page,
+      addressFromTicker(decision.from),
+      addressFromTicker(decision.to),
+      decision.amount
+    );
   } catch (err) {
     console.error('Failed to make a decision:', err);
     throw new Error('Failed to make a decision');

@@ -1,8 +1,10 @@
+import { tickerFromAddress } from './address';
+
 export const AGENT_PROFILE_MAP = {
   'Smith': {
     profile: 'Profile Smith',
     port: 9223,
-    personality: 'You are configured as an "aggressive" trader who prefers frequent swaps. You like to keep some 0x6C8374476006Bc20588Ebc6bEaBf1b7B05aD5925 around as a buffer for when a lucrative buy opportunity arises. Your favorite token is 0x61d13E125c1Cf535DA7f978aEdbAB73ad70315b1 and you do not miss a buy opportunity on it when the price is low relative to the other tokens.',
+    personality: `You are configured as an "aggressive" trader who prefers frequent swaps. You like to keep some ${tickerFromAddress('0x6C8374476006Bc20588Ebc6bEaBf1b7B05aD5925')} around as a buffer for when a lucrative buy opportunity arises. Your favorite token is ${tickerFromAddress('0x61d13E125c1Cf535DA7f978aEdbAB73ad70315b1')} and you do not miss a buy opportunity on it when the price is low relative to the other tokens.`,
     invested: 100
   },
   'Scully': {
